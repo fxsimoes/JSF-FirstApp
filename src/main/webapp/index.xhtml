@@ -13,11 +13,16 @@
             <f:selectItem itemLabel="List Products" itemValue="listProducts" />
             <f:selectItem itemLabel="List Shelves" itemValue="listShelves" />   
         </p:selectOneButton>
-       <p:commandButton value="Exit" update="display" action="tableExport" icon="ui-icon-close" />
+
+       
         <p:spacer />
-        <h:outputText id="display" value="#{selectOneView.option}" action="tableExport"/>
+        <h:outputText id="display" value="#{selectOneView.option}"/>
+        		
+		 <h:commandButton value="YOLO" action="tableExport"/>
+ <p:commandButton value="Exit" update="display" action="tableExport" icon="ui-icon-close"/>
     </h:panelGrid>
 
 		</h:form>
+
 	</h:body>
 </html>
