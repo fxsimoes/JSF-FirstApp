@@ -25,7 +25,7 @@ private List<Car> cars;
     
    @PostConstruct
    public void init() {
-       cars = service.createCars(10);
+       cars = service.createCars(20);
    }
 
    public List<Car> getCars() {
