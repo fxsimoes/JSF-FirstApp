@@ -12,10 +12,7 @@ import io.altar.jsfproject.service.CarService;
 
 @ManagedBean
 public class DataExporterView implements Serializable {
-    
-   /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 private List<Car> cars;
