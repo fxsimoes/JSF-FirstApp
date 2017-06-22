@@ -9,6 +9,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
 	<dependencies>
 
 		<dependency>
@@ -38,16 +46,19 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>itextpdf</artifactId>
-			<version>5.5.10</version>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.xmlbeans</groupId>
-			<artifactId>xmlbeans</artifactId>
-			<version>2.6.0</version>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>glass-x</artifactId>
+			<version>1.0.6</version>
 		</dependency>
+
+		<!-- <dependency> <groupId>org.apache.xmlbeans</groupId> <artifactId>xmlbeans</artifactId> 
+			<version>2.6.0</version> </dependency> -->
 
 	</dependencies>
 	<build>
