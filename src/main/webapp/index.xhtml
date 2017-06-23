@@ -7,6 +7,9 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="resources/css/bootstrap.css" type="text/css" media="all"/>
+	<link rel="stylesheet" href="resources/css/bootstrap-theme.css" type="text/css" media="all"/>
+	<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="all"/> 
 </h:head>
 <h:body>
 	<ui:composition template="/view/common/commonLayout.xhtml">
@@ -19,7 +22,7 @@
 					actionListener="#{buttonView.buttonAction}"
 					styleClass="ui-priority-primary" />
 				<p:spacer />
-				<p:commandButton value="Export Table" icon="storage"
+				<p:commandButton value="Export Table" id="etable" icon="storage"
 					action="tableExport" styleClass="uui-priority-primary" />
 
 			</h:form>

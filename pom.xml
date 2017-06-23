@@ -10,13 +10,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>prime-repo</id>
-			<name>Prime Repo</name>
-			<url>http://repository.primefaces.org</url>
-		</repository>
-	</repositories>
 	<dependencies>
 
 		<dependency>
@@ -57,10 +50,16 @@
 			<version>1.0.6</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.apache.xmlbeans</groupId> <artifactId>xmlbeans</artifactId> 
-			<version>2.6.0</version> </dependency> -->
-
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
