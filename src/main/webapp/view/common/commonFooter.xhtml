@@ -3,11 +3,16 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
+      xmlns:b="http://bootsfaces.net/ui">
+      
     <body>
 	    <ui:composition>
 
-		<h1>This is default footer</h1>
+		<b:navBar fluid="true" position="bottom" sticky="true">		
+			<p class="col-xs-4" id="Date"></p>
+			<p class="col-xs-4" id="Time"></p>
+			<p class="col-xs-2 col-xs-offset-2">Creator: Francisco Simões</p>
+		</b:navBar>
 
 	    </ui:composition>
     </body>

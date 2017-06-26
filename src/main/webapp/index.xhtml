@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,9 +16,9 @@
 	<ui:composition template="/view/common/commonLayout.xhtml">
 		<ui:define name="content">
 			<h:form>
-				<p:commandButton value="List Products" id="products"
+				<p:commandButton value="Add Products" id="products"
 					actionListener="#{buttonView.buttonAction}"
-					styleClass="ui-priority-primary" />
+					styleClass="ui-priority-primary" action="productMenu" />
 				<p:commandButton value="List Shelves" id="shelves"
 					actionListener="#{buttonView.buttonAction}"
 					styleClass="ui-priority-primary" />

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	<ui:composition template="/view/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<p:inputText placeholder="Product's name" />
+				<br />
+				<br />
+				<p:inputText placeholder="Product's price" />
+				<br />
+				<br />
+				<p:inputText placeholder="Product's discount" />
+				<br />
+				<br />
+				<p:outputLabel for="console" value="IVA: " />
+				<p:selectOneMenu id="console" value="#{selectOneMenuView.console}"
+					style="width:125px">
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItem itemLabel="0%" itemValue="0" />
+					<f:selectItem itemLabel="6%" itemValue="6" />
+					<f:selectItem itemLabel="13%" itemValue="13" />
+					<f:selectItem itemLabel="23%" itemValue="23" />
+				</p:selectOneMenu>
+				<br />
+				<br />
+				<p:inputText placeholder="Product's name" />
+				<br />
+				<br />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
