@@ -15,10 +15,10 @@ import io.altar.jsfproject.repository.ProductRepository;
 public class ProductService {
 	private ProductRepository productList = ProductRepository.getInstance();
 	
-//	public List<Product> showProducts() {
-//        List<Product> list = new ArrayList<Product>((Collection<Product>)productList);         
-//        return list;
-//    }
+	public List<Product> showProducts() {
+        List<Product> list = new ArrayList<Product>((Collection<Product>)productList.values());         
+        return list;
+    }
 	
 	public void addProduct(Product product){
 		productList.addToList(product);
