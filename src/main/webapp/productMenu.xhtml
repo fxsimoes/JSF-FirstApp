@@ -11,27 +11,45 @@
 	<ui:composition template="/view/common/commonLayout.xhtml">
 		<ui:define name="content">
 			<h:form>
-				<p:inputText placeholder="Product's name" />
+				<p:dataTable id="ProductList" var="product"
+					value="#{ProductView.products}" selectionMode="single"
+					selection="#{ProductView.selectedProduct}" rowKey="#{product.id}"
+					draggableColumns="true">
+					<f:facet name="header">
+						<p:commandButton value="Add" update="ProductList"
+							action="#{ProductView.addProduct()}" />
+						<p:commandButton value="Edit" update="ProductList"
+							action="#{ProductView.editProduct()}" />
+						<p:commandButton value="Delete" update="ProductList"
+							action="#{ProductView.deleteProduct()}" />
+					</f:facet>
+
+
+				<!-- ProductRepository > ProductService > ProductView > XHTML -->
+				<p:column headerText="Year">
+					<h:outputText placeholder="Product's name"
+						value="#{ProductView.selectedProduct.name}" />
+				</p:column>
+								</p:dataTable>
 				<br />
 				<br />
-				<p:inputText placeholder="Product's price" />
+				<p:inputNumber id="pPrice" placeholder="Product's price"
+					value="#{ProductView.selectedProduct.price}">
+				</p:inputNumber>
 				<br />
 				<br />
-				<p:inputText placeholder="Product's discount" />
+				<p:inputText placeholder="Product's discount"
+					value="#{ProductView.selectedProduct.discount}" />
 				<br />
 				<br />
 				<p:outputLabel for="console" value="IVA: " />
-				<p:selectOneMenu id="console" value="#{selectOneMenuView.console}"
-					style="width:125px">
-					<f:selectItem itemLabel="Select One" itemValue="" />
+				<p:selectOneMenu id="console"
+					value="#{ProductView.selectedProduct.iva}" style="width:125px">
 					<f:selectItem itemLabel="0%" itemValue="0" />
 					<f:selectItem itemLabel="6%" itemValue="6" />
 					<f:selectItem itemLabel="13%" itemValue="13" />
 					<f:selectItem itemLabel="23%" itemValue="23" />
 				</p:selectOneMenu>
-				<br />
-				<br />
-				<p:inputText placeholder="Product's name" />
 				<br />
 				<br />
 			</h:form>

@@ -1,5 +1,6 @@
 package io.altar.jsfproject.repository;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
@@ -11,6 +12,10 @@ public class EntityRepository<E extends Entity> {
 
 	public Integer getNextId() {
 		return ++id;
+	}
+	
+	public Collection<E> values(){
+		return (Collection<E>) entityList.values();
 	}
 
 	public void addToList(Entity entity) {

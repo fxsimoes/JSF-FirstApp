@@ -3,15 +3,10 @@ package io.altar.jsfproject.model;
 public class Car {
 
 	private String id;
-
 	private String brand;
-	
 	private int year;
-	
 	private String color;
-	
 	private int price;
-	
 	private boolean soldState;
 
 	public String getId() {
