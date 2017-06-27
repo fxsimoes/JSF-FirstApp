@@ -16,47 +16,47 @@ import io.altar.jsfproject.service.ProductService;
 public class ProductView implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	private Product selectedProduct;
 	
-	@Inject static ProductService productService;
+	public Product getSelectedProduct() {
+		return selectedProduct;
+	}
+	
+	public void setSelectedProduct(Product selectedProduct) {
+		this.selectedProduct = selectedProduct;
+	}
+	
+	private Product newProduct = new Product();
 
-//	private static final List<Product> products = productService.showProducts();
-	private static final List<Product> products = new ArrayList<>();
-     
-    public List<Product> getProducts() {
-        return products;
-    }
-    
-    public ProductService getProductService() {
-        return productService;
-    }
- 
-    public void setProductService(ProductService productService) {
-        ProductView.productService = productService;
-    }
-    
-    public Product getSelectedProduct() {
-        return selectedProduct;
-    }
- 
-    public void setSelectedProduct(Product selectedProduct) {
-        this.selectedProduct = selectedProduct;
-    }
-    
-    public String addProduct(String Product){
-    	Product product = new Product(null, "try", 2, 2, 1.0);
-    	productService.addProduct(product);
-    	products.add(product);
-    	return null;
-    }
-    
-    public String editProduct(){
-    	return null;
-    }
-    
-    public String deleteProduct(){
-    	products.remove(selectedProduct);
-    	return null;
-    }
+	public Product getNewProduct() {
+		return newProduct;
+	}
+
+	public void setNewProduct(Product newProduct) {
+		this.newProduct = newProduct;
+	}
+
+	@Inject
+	private ProductService productService;
+
+	public List<Product> getProducts() {
+		return productService.showEntities(productService.getProductRepository());
+	}
+
+	public String addProduct() {
+		productService.addEntity(productService.getProductRepository(), newProduct);
+		return null;
+	}
+
+	public String editProduct() {
+		System.out.println(selectedProduct.toString());
+		productService.editProduct(selectedProduct);
+		return null;
+	}
+
+	public String deleteProduct() {
+		productService.removeEntity(productService.getProductRepository(), selectedProduct);
+		return null;
+	}
 }

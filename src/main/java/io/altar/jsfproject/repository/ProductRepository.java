@@ -23,32 +23,32 @@ public class ProductRepository extends EntityRepository<Product> {
 		((Product) ProductRepository.getInstance().get(id)).setPrice(price);
 	}
 	
-	public void addShelfLoc(Integer id, Integer shelf) {
-		ArrayList<Integer> shelfLoc = ((Product) ProductRepository.getInstance().get(id)).getShelfLoc();
-		if(shelfLoc != null){
-			shelfLoc.add(shelf);
-		}		
-		((Product) ProductRepository.getInstance().get(id)).setShelfLoc(shelfLoc);
-	}
-	
-	public void changeShelfLoc(Integer oldId, Integer newId, Integer shelfId) {
-		if(oldId!=newId){
-
-			if (oldId != null) {
-				ArrayList<Integer> oldList = ((Product)  ProductRepository.getInstance().get(oldId)).getShelfLoc();
-				oldList.remove(shelfId);
-				((Product)  ProductRepository.getInstance().get(oldId))
-						.setShelfLoc(oldList);
-			}
-			
-			if (newId != null) {
-			ArrayList<Integer> newList = ((Product)  ProductRepository.getInstance().get(newId))
-					.getShelfLoc();
-				newList.add(shelfId);
-				Collections.sort(newList);
-				((Product)  ProductRepository.getInstance().get(newId))
-						.setShelfLoc(newList);
-			}	
-		}
-	}
+//	public void addShelfLoc(Integer id, Integer shelf) {
+//		ArrayList<Integer> shelfLoc = ((Product) ProductRepository.getInstance().get(id)).getShelfLoc();
+//		if(shelfLoc != null){
+//			shelfLoc.add(shelf);
+//		}		
+//		((Product) ProductRepository.getInstance().get(id)).setShelfLoc(shelfLoc);
+//	}
+//	
+//	public void changeShelfLoc(Integer oldId, Integer newId, Integer shelfId) {
+//		if(oldId!=newId){
+//
+//			if (oldId != null) {
+//				ArrayList<Integer> oldList = ((Product)  ProductRepository.getInstance().get(oldId)).getShelfLoc();
+//				oldList.remove(shelfId);
+//				((Product)  ProductRepository.getInstance().get(oldId))
+//						.setShelfLoc(oldList);
+//			}
+//			
+//			if (newId != null) {
+//			ArrayList<Integer> newList = ((Product)  ProductRepository.getInstance().get(newId))
+//					.getShelfLoc();
+//				newList.add(shelfId);
+//				Collections.sort(newList);
+//				((Product)  ProductRepository.getInstance().get(newId))
+//						.setShelfLoc(newList);
+//			}	
+//		}
+//	}
 }
