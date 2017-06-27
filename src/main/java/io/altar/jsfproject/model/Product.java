@@ -1,72 +1,73 @@
 package io.altar.jsfproject.model;
 
-import io.altar.jsfproject.model.Entity;
+import java.util.ArrayList;
+
 import io.altar.jsfproject.repository.ProductRepository;
 
-public class Product extends Entity {
-
-	public int product_id;
+public class Product extends Entity{
+	private ArrayList<Integer> shelfLoc;
+	private String name;
+	private Integer discount;
+	private Integer iva;
+	private Double price;
 	
-	public Integer [] shelf_idLoc;
+	public void setShelfLoc(ArrayList<Integer> shelfLoc){
+		this.shelfLoc = shelfLoc;
+	}
 	
-	public double discount;
+	public void setName(String name){
+		this.name = name;
+	}
 	
-	public int iva;
+	public void setDiscount(Integer discount){
+		this.discount = discount;
+	}
 	
-	public double price;
-		
-	public int getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
-	}
-
-	public double getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(Double discount2) {
-		this.discount = discount2;
-	}
-
-	public int getIva() {
-		return iva;
-	}
-
-	public void setIva(int iva) {
+	public void setIva(Integer iva){
 		this.iva = iva;
 	}
-
-	public double getPrice() {
-		return price;
+	
+	public void setPrice(Double price){
+		this.price = price;
 	}
-
-	public void setPrice(Double price2) {
-		this.price = price2;
+	
+	public ArrayList<Integer> getShelfLoc(){
+		return this.shelfLoc;
 	}
-
-	public Integer[] getShelf_idLoc() {
-		return shelf_idLoc;
+	
+	public String getName(){
+		return this.name;
 	}
-
-	public void setShelf_idLoc(Integer[] shelf_idLoc) {
-		this.shelf_idLoc = shelf_idLoc;
+	
+	public Integer getDiscount(){
+		return this.discount;
+	}
+	
+	public Integer getIva(){
+		return this.iva;
+	}
+	
+	public Double getPrice(){
+		return this.price;
+	}
+	
+	public Product(ArrayList<Integer> shelfLoc, String name, Integer discount, Integer iva, Double price){
+		this.shelfLoc = shelfLoc;
+		this.iva = iva;
+		this.price = price;
+		this.name = name;
+		this.discount = discount;
+		ProductRepository.getInstance().addToList(this);
 	}
 	
 	@Override
 	public String toString(){
-		return "ID  " + product_id + "  | PVP  " + price + "€  | Discount  " + discount + "€  | IVA  " + iva + "%";
+		String shelfStr = null;
+		if(!(shelfLoc.isEmpty())){
+			shelfStr = shelfLoc.toString();
+		}
+		return String.format("| ID: %d | Name: %s | Shelves: %s | Discount: %d%% | IVA: %d%% | Price: %.2f€ |\n", getId(), name, shelfStr, discount, iva, price);
 	}
 	
-	public Product(int pId, double finalPrice, double DiscountValue, int ivaTax){
-		
-		product_id=pId;
-		discount= DiscountValue;
-		iva= ivaTax;
-		price=finalPrice;
-		ProductRepository.getInstance().addToList(this);
-	}
 }
 

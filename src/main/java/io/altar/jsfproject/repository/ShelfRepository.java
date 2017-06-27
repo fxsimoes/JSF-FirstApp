@@ -1,8 +1,6 @@
 package io.altar.jsfproject.repository;
 
 import io.altar.jsfproject.model.Shelf;
-import io.altar.jsfproject.repository.EntityRepository;
-import io.altar.jsfproject.repository.ShelfRepository;
 
 public class ShelfRepository extends EntityRepository<Shelf> {
 	private static final ShelfRepository INSTANCE = new ShelfRepository();
@@ -13,9 +11,18 @@ public class ShelfRepository extends EntityRepository<Shelf> {
 		return INSTANCE;
 	}
 
-	public static void editElement(Integer id, Double location, Integer capacity, Double dailyPrice) {
-		((Shelf)ShelfRepository.getInstance().get(id)).setLocation(location);
-		((Shelf)ShelfRepository.getInstance().get(id)).setCapacity(capacity);
-		((Shelf)ShelfRepository.getInstance().get(id)).setDailyPrice(dailyPrice);
+	public void modifyEntity(Integer id, Integer location, Integer capacity, Integer productID, Double price) {
+		((Shelf) ShelfRepository.getInstance().get(id)).setLocation(location);
+		((Shelf) ShelfRepository.getInstance().get(id)).setCapacity(capacity);
+		((Shelf) ShelfRepository.getInstance().get(id)).setProductID(productID);
+		((Shelf) ShelfRepository.getInstance().get(id)).setDailyPrice(price);
+	}
+	
+	public void showProduct(Integer id, Integer productID) {
+		if(((Shelf) ShelfRepository.getInstance().get(id)).getProductID()==null){
+			((Shelf) ShelfRepository.getInstance().get(id)).setProductID(productID);
+		}else{
+			((Shelf) ShelfRepository.getInstance().get(id)).setProductID(null);
+		}
 	}
 }
