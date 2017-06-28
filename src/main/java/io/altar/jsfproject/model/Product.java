@@ -51,14 +51,18 @@ public class Product extends Entity{
 		return this.price;
 	}
 	
-	public Product(ArrayList<Integer> shelfLoc, String name, Integer discount, Integer iva, Double price){
-		this.shelfLoc = shelfLoc;
-		this.iva = iva;
-		this.price = price;
-		this.name = name;
-		this.discount = discount;
-		ProductRepository.getInstance().addToList(this);
+	public Product(){
+		
 	}
+	
+//	public Product(ArrayList<Integer> shelfLoc, String name, Integer discount, Integer iva, Double price){
+//		this.shelfLoc = shelfLoc;
+//		this.iva = iva;
+//		this.price = price;
+//		this.name = name;
+//		this.discount = discount;
+//		ProductRepository.getInstance().addToList(this);
+//	}
 	
 	@Override
 	public String toString(){
