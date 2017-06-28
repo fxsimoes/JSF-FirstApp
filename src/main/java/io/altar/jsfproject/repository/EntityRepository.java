@@ -8,17 +8,17 @@ import io.altar.jsfproject.model.Entity;
 
 public class EntityRepository<E extends Entity> {
 	private Integer id = 0;
-	private LinkedHashMap<Integer, Entity> entityList = new LinkedHashMap<>();
+	private LinkedHashMap<Integer, E> entityList = new LinkedHashMap<>();
 
 	public Integer getNextId() {
 		return ++id;
 	}
 	
 	public Collection<E> values(){
-		return (Collection<E>) entityList.values();
+		return entityList.values();
 	}
 
-	public void addToList(Entity entity) {
+	public void addToList(E entity) {
 		entity.setId(getNextId());
 		entityList.put(entity.getId(), entity);
 	}
@@ -27,10 +27,10 @@ public class EntityRepository<E extends Entity> {
 		entityList.remove(id);
 	}
 
-	public void editElement() {
+	public void edit() {
 	}
 
-	public Entity get(Integer id) {
+	public E get(Integer id) {
 		return entityList.get(id);
 	}
 
@@ -46,7 +46,7 @@ public class EntityRepository<E extends Entity> {
 		return entityList.containsKey(key);
 	}
 
-	public void displayElement(Integer key) {
+	public void display(Integer key) {
 		System.out.println(entityList.get(key).toString() + "\n");
 	}
 

@@ -1,8 +1,7 @@
 package io.altar.jsfproject.view;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -29,6 +28,7 @@ public class ProductView implements Serializable {
 	
 	private Product newProduct = new Product();
 
+
 	public Product getNewProduct() {
 		return newProduct;
 	}
@@ -40,7 +40,7 @@ public class ProductView implements Serializable {
 	@Inject
 	private ProductService productService;
 
-	public List<Product> getProducts() {
+	public Collection<Product> getProducts() {
 		return productService.showEntities(productService.getProductRepository());
 	}
 

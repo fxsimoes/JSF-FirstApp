@@ -11,76 +11,153 @@
 	<ui:composition template="/view/common/commonLayout.xhtml">
 		<ui:define name="content">
 			<h:form>
-				<p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-					paginator="true" rows="10" style="margin-bottom:20px">
+				<p:tabView id="tabs">
+					<p:tab title="Produtos">
+						<p:growl id="msg" showDetail="true" />
+						<p:dataTable id="ProductList" var="pList"
+							value="#{ProductView.getProducts()}" selectionMode="single"
+							selection="#{ProductView.selectedProduct}" rowKey="#{pList.id}"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+							paginator="true" rows="10" style="margin-bottom:20px">
 
-					<f:facet name="{Exporters}">
-						<h:commandLink>
-							<p:graphicImage value="/demo/images/excel.png" width="24" />
-							<p:dataExporter type="xls" target="tbl" fileName="cars" />
-						</h:commandLink>
+							<f:facet name="{Exporters}">
+								<h:commandLink>
+									<p:graphicImage value="/demo/images/excel.png" width="24" />
+									<p:dataExporter type="xls" target="ProductList"
+										fileName="entities" />
+								</h:commandLink>
 
-						<h:commandLink>
-							<p:graphicImage value="/demo/images/pdf.png" width="24" />
-							<p:dataExporter type="pdf" target="tbl" fileName="cars" />
-						</h:commandLink>
+								<h:commandLink>
+									<p:graphicImage value="/demo/images/pdf.png" width="24" />
+									<p:dataExporter type="pdf" target="ProductList"
+										fileName="entities" />
+								</h:commandLink>
 
-						<h:commandLink>
-							<p:graphicImage value="/demo/images/csv.png" width="24" />
-							<p:dataExporter type="csv" target="tbl" fileName="cars" />
-						</h:commandLink>
+								<h:commandLink>
+									<p:graphicImage value="/demo/images/csv.png" width="24" />
+									<p:dataExporter type="csv" target="ProductList"
+										fileName="entities" />
+								</h:commandLink>
+							</f:facet>
 
-					</f:facet>
+							<f:facet name="header">
+								<p:commandButton update="ProductList" value="Add"
+									oncomplete="PF('productAdd').show()" />
+								<p:commandButton update="ProductList" value="Edit"
+									oncomplete="PF('productEdit').show()" />
+								<p:commandButton value="Delete" update="ProductList"
+									action="#{ProductView.deleteProduct()}" />
+							</f:facet>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Id" />
-						</f:facet>
-						<h:outputText value="#{car.id}" />
-					</p:column>
+							<p:column headerText="ID">
+								<h:outputText value="#{pList.id}" />
+							</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Year" />
-						</f:facet>
-						<h:outputText value="#{car.year}" />
-					</p:column>
+							<p:column headerText="Name">
+								<h:outputText value="#{pList.name}" />
+							</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Brand" />
-						</f:facet>
-						<h:outputText value="#{car.brand}" />
-					</p:column>
+							<p:column headerText="Price">
+								<h:outputText value="#{pList.price}" />
+							</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Color" />
-						</f:facet>
-						<h:outputText value="#{car.color}" />
-					</p:column>
-				</p:dataTable>
+							<p:column headerText="Discount">
+								<h:outputText value="#{pList.discount}" />
+							</p:column>
+
+							<p:column headerText="IVA">
+								<h:outputText value="#{pList.iva}" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dialog header="Adicionar Produto" widgetVar="productAdd"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false">
+							<p:outputPanel id="addProductDetail"
+								style="text-align:center; color:black;">
+								<p:panelGrid columns="2" columnClasses="label,value">
+									<h:outputText value="Name" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.newProduct.name}" required="true" />
+
+									<h:outputText value="Price" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.newProduct.price}" required="true" />
+
+									<h:outputText value="Discount" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.newProduct.discount}" required="true" />
+
+									<h:outputText value="IVA" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.newProduct.discount}" required="true" />
+
+									<!-- 							<h:outputText value="Prateleiras:" />
+							<p:inputText styleClass="input"
+								value="#{ProductView.newProduct.shelfLoc}" /> -->
+
+								</p:panelGrid>
+								<p:commandButton id="ShelfAddSubmit" value="Submit"
+									update="ProductList" action="#{ProductView.addProduct()}"
+									oncomplete="PF('productAdd').hide()" />
+							</p:outputPanel>
+						</p:dialog>
+
+						<p:dialog header="Editar Informação do Produto"
+							widgetVar="productEdit" modal="true" showEffect="fade"
+							hideEffect="fade" resizable="false">
+							<p:outputPanel id="editProductDetail" style="text-align:center;">
+								<p:panelGrid columns="2"
+									rendered="#{not empty ProductView.selectedProduct}"
+									columnClasses="label,value">
+									<h:outputText value="Nome" />
+									<p:inputText styleClass="input" readonly="false"
+										value="#{ProductView.selectedProduct.name}" required="true" />
+
+									<h:outputText value="Prateleiras:" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.selectedProduct.shelfLoc}" />
+
+									<h:outputText value="Desconto" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.selectedProduct.discount}"
+										required="true" />
+
+									<h:outputText value="IVA" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.selectedProduct.iva}" required="true" />
+
+									<h:outputText value="Price" />
+									<p:inputText styleClass="input"
+										value="#{ProductView.selectedProduct.price}" required="true" />
+								</p:panelGrid>
+								<p:commandButton id="ProductEditSubmit" value="Submit"
+									update="ProductList" action="#{ProductView.editProduct()}"
+									oncomplete="PF('productEdit').hide()" />
+							</p:outputPanel>
+						</p:dialog>
+					</p:tab>
+					<p:tab title="Prateleiras" />
+				</p:tabView>
 
 				<h3>Export Current Page</h3>
 				<h:commandLink>
-					<p:graphicImage value="demo/images/excel.png" width="36"/>
-					<p:dataExporter type="xls" target="tbl" fileName="cars"
+					<p:graphicImage value="demo/images/excel.png" width="36" />
+					<p:dataExporter type="xls" target="ProductList" fileName="entities"
 						pageOnly="true" />
 				</h:commandLink>
 
 				<h:commandLink>
-					<p:graphicImage value="demo/images/pdf.png" width="36"/>
-					<p:dataExporter type="pdf" target="tbl" fileName="cars"
+					<p:graphicImage value="demo/images/pdf.png" width="36" />
+					<p:dataExporter type="pdf" target="ProductList" fileName="entities"
 						pageOnly="true" />
 				</h:commandLink>
 
 				<h:commandLink>
-					<p:graphicImage value="demo/images/csv.png" width="36"/>
-					<p:dataExporter type="csv" target="tbl" fileName="cars"
+					<p:graphicImage value="demo/images/csv.png" width="36" />
+					<p:dataExporter type="csv" target="ProductList" fileName="entities"
 						pageOnly="true" />
 				</h:commandLink>
-
 			</h:form>
 		</ui:define>
 	</ui:composition>

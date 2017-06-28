@@ -14,7 +14,7 @@
 				<p:dataTable id="ProductList" var="product"
 					value="#{ProductView.products}" selectionMode="single"
 					selection="#{ProductView.selectedProduct}" rowKey="#{product.id}"
-					draggableColumns="true">
+					draggableColumns="false">
 					<f:facet name="header">
 						<p:commandButton value="Add" update="ProductList"
 							action="#{ProductView.addProduct()}" />
@@ -25,12 +25,12 @@
 					</f:facet>
 
 
-				<!-- ProductRepository > ProductService > ProductView > XHTML -->
-				<p:column headerText="Year">
-					<h:outputText placeholder="Product's name"
-						value="#{ProductView.selectedProduct.name}" />
-				</p:column>
-								</p:dataTable>
+					<!-- ProductRepository > ProductService > ProductView > XHTML -->
+					<p:column headerText="Name">
+						<h:outputText placeholder="Product's name"
+							value="#{ProductView.selectedProduct.name}" />
+					</p:column>
+				</p:dataTable>
 				<br />
 				<br />
 				<p:inputNumber id="pPrice" placeholder="Product's price"

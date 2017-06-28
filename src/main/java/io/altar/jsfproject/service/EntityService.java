@@ -10,9 +10,9 @@ import io.altar.jsfproject.repository.EntityRepository;
 public class EntityService<E extends Entity> {
 	
 	
-	public List<E> showEntities(EntityRepository<E> entityList){
-		List<E> list = new ArrayList<E>((Collection<E>)entityList.values());
-		return list;
+	public Collection<E> showEntities(EntityRepository<E> entityList){
+//		Collection<E> list = new ArrayList<E>(entityList.values());
+		return entityList.values();
 	}
 	
 	public void addEntity(EntityRepository<E> entityList, E entity){
