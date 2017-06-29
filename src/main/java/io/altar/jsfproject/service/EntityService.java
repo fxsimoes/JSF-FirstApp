@@ -1,8 +1,6 @@
 package io.altar.jsfproject.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import io.altar.jsfproject.model.Entity;
 import io.altar.jsfproject.repository.EntityRepository;

@@ -6,7 +6,6 @@ public class Product extends Entity {
 	private ArrayList<Integer> shelfLoc;
 	private String name;
 	private Integer discount;
-
 	private Integer iva;
 	private Double price;
 

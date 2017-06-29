@@ -16,7 +16,7 @@
 						<p:growl id="msg" showDetail="true" />
 						<p:dataTable id="ProductList" var="pList"
 							value="#{ProductView.getProducts()}" selectionMode="single"
-							selection="#{ProductView.selectedProduct}" rowKey="#{pList.id}"
+							selection="#{ProductView.activeProduct}" rowKey="#{pList.id}"
 							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 							paginator="true" rows="10" style="margin-bottom:20px">
 
@@ -46,7 +46,18 @@
 								<p:commandButton update="ProductList" value="Edit"
 									oncomplete="PF('productEdit').show()" />
 								<p:commandButton value="Delete" update="ProductList"
-									action="#{ProductView.deleteProduct()}" />
+									action="#{ProductView.deleteProduct()}"
+									>
+									<p:confirm header="Confirmation" message="Are you sure?"
+										icon="ui-icon-alert" />
+								</p:commandButton>
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+									<p:commandButton value="Yes" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="No" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
 							</f:facet>
 
 							<p:column headerText="ID">
@@ -73,7 +84,7 @@
 						<p:dialog header="Adicionar Produto" widgetVar="productAdd"
 							modal="true" showEffect="fade" hideEffect="fade"
 							resizable="false">
-							<p:outputPanel id="addProductDetail"
+							<p:outputPanel id="addProduct"
 								style="text-align:center; color:black;">
 								<p:panelGrid columns="2" columnClasses="label,value">
 									<h:outputText value="Name" />
@@ -90,7 +101,7 @@
 
 									<h:outputText value="IVA" />
 									<p:inputText styleClass="input"
-										value="#{ProductView.newProduct.discount}" required="true" />
+										value="#{ProductView.newProduct.iva}" required="true" />
 
 									<!-- 							<h:outputText value="Prateleiras:" />
 							<p:inputText styleClass="input"
@@ -103,33 +114,31 @@
 							</p:outputPanel>
 						</p:dialog>
 
-						<p:dialog header="Editar Informação do Produto"
-							widgetVar="productEdit" modal="true" showEffect="fade"
+						<p:dialog header="Editar Produto" widgetVar="productEdit"
+							modal="true" showEffect="fade"
+							rendered="#{not empty ProductView.activeProduct}"
 							hideEffect="fade" resizable="false">
-							<p:outputPanel id="editProductDetail" style="text-align:center;">
-								<p:panelGrid columns="2"
-									rendered="#{not empty ProductView.selectedProduct}"
-									columnClasses="label,value">
+							<p:outputPanel id="editProduct" style="text-align:center;">
+								<p:panelGrid columns="2" columnClasses="label,value">
 									<h:outputText value="Nome" />
 									<p:inputText styleClass="input" readonly="false"
-										value="#{ProductView.selectedProduct.name}" required="true" />
+										value="#{ProductView.activeProduct.name}" required="true" />
 
-									<h:outputText value="Prateleiras:" />
+									<!-- 									<h:outputText value="Prateleiras:" />
 									<p:inputText styleClass="input"
-										value="#{ProductView.selectedProduct.shelfLoc}" />
+										value="#{ProductView.activeProduct.shelfLoc}" /> -->
 
 									<h:outputText value="Desconto" />
 									<p:inputText styleClass="input"
-										value="#{ProductView.selectedProduct.discount}"
-										required="true" />
+										value="#{ProductView.activeProduct.discount}" required="true" />
 
 									<h:outputText value="IVA" />
 									<p:inputText styleClass="input"
-										value="#{ProductView.selectedProduct.iva}" required="true" />
+										value="#{ProductView.activeProduct.iva}" required="true" />
 
 									<h:outputText value="Price" />
 									<p:inputText styleClass="input"
-										value="#{ProductView.selectedProduct.price}" required="true" />
+										value="#{ProductView.activeProduct.price}" required="true" />
 								</p:panelGrid>
 								<p:commandButton id="ProductEditSubmit" value="Submit"
 									update="ProductList" action="#{ProductView.editProduct()}"

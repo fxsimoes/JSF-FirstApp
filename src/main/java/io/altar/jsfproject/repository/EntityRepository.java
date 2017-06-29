@@ -27,9 +27,6 @@ public class EntityRepository<E extends Entity> {
 		entityList.remove(id);
 	}
 
-	public void edit() {
-	}
-
 	public E get(Integer id) {
 		return entityList.get(id);
 	}

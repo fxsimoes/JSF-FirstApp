@@ -1,7 +1,6 @@
 package io.altar.jsfproject.repository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import io.altar.jsfproject.model.Product;
 

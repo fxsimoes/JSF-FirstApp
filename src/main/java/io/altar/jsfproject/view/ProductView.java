@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import io.altar.jsfproject.model.Product;
@@ -16,19 +18,18 @@ public class ProductView implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Product selectedProduct;
-	
-	public Product getSelectedProduct() {
-		return selectedProduct;
-	}
-	
-	public void setSelectedProduct(Product selectedProduct) {
-		this.selectedProduct = selectedProduct;
-	}
-	
 	private Product newProduct = new Product();
+	
+	private Product activeProduct;
 
+	public Product getActiveProduct() {
+		return activeProduct;
+	}
 
+	public void setActiveProduct(Product activeProduct) {
+		this.activeProduct = activeProduct;
+	}
+	
 	public Product getNewProduct() {
 		return newProduct;
 	}
@@ -41,22 +42,26 @@ public class ProductView implements Serializable {
 	private ProductService productService;
 
 	public Collection<Product> getProducts() {
-		return productService.showEntities(productService.getProductRepository());
+		return productService.showEntities(productService.getProductList());
 	}
 
 	public String addProduct() {
-		productService.addEntity(productService.getProductRepository(), newProduct);
+		productService.addEntity(productService.getProductList(), newProduct);
 		return null;
 	}
 
 	public String editProduct() {
-		System.out.println(selectedProduct.toString());
-		productService.editProduct(selectedProduct);
+		System.out.println(activeProduct.toString());
+		productService.editProduct(activeProduct);
 		return null;
 	}
 
 	public String deleteProduct() {
-		productService.removeEntity(productService.getProductRepository(), selectedProduct);
+//		try{
+		productService.removeEntity(productService.getProductList(), activeProduct);
+//		}catch(NullPointerException e){
+//			System.out.println("Exception Caught");
+//		}
 		return null;
 	}
 }
