@@ -13,7 +13,7 @@
 			<h:form>
 				<p:dataTable id="ProductList" var="product"
 					value="#{ProductView.products}" selectionMode="single"
-					selection="#{ProductView.selectedProduct}" rowKey="#{product.id}"
+					selection="#{ProductView.activeProduct}" rowKey="#{product.id}"
 					draggableColumns="false">
 					<f:facet name="header">
 						<p:commandButton value="Add" update="ProductList"
@@ -28,23 +28,23 @@
 					<!-- ProductRepository > ProductService > ProductView > XHTML -->
 					<p:column headerText="Name">
 						<h:outputText placeholder="Product's name"
-							value="#{ProductView.selectedProduct.name}" />
+							value="#{ProductView.activeProduct.name}" />
 					</p:column>
 				</p:dataTable>
 				<br />
 				<br />
 				<p:inputNumber id="pPrice" placeholder="Product's price"
-					value="#{ProductView.selectedProduct.price}">
+					value="#{ProductView.activeProduct.price}">
 				</p:inputNumber>
 				<br />
 				<br />
 				<p:inputText placeholder="Product's discount"
-					value="#{ProductView.selectedProduct.discount}" />
+					value="#{ProductView.activeProduct.discount}" />
 				<br />
 				<br />
 				<p:outputLabel for="console" value="IVA: " />
 				<p:selectOneMenu id="console"
-					value="#{ProductView.selectedProduct.iva}" style="width:125px">
+					value="#{ProductView.activeProduct.iva}" style="width:125px">
 					<f:selectItem itemLabel="0%" itemValue="0" />
 					<f:selectItem itemLabel="6%" itemValue="6" />
 					<f:selectItem itemLabel="13%" itemValue="13" />

@@ -1,9 +1,5 @@
 package io.altar.jsfproject.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
