@@ -1,13 +1,27 @@
 package io.altar.jsfproject.model;
 
-import io.altar.jsfproject.model.Entity;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import io.altar.jsfproject.model.EntityModel;
 import io.altar.jsfproject.repository.ShelfRepository;
 
-public class Shelf extends Entity{
-	private Integer location;
-	private Integer capacity;
-	private Integer productID;
-	private Double dailyPrice;
+	@Entity
+	@Table(name="Shelves")
+	public class Shelf extends EntityModel implements Serializable{
+
+		private static final long serialVersionUID = 1L;
+		@Column(name="Location")
+		private Integer location = 0;
+		@Column(name="Capacity")
+		private Integer capacity = 0;
+		@Column(name="Product ID", nullable = true)
+		private Integer productID = null;
+		@Column(name="Rental Price")
+		private Double dailyPrice = 0.0;
 	
 	public void setLocation(Integer location){
 		this.location = location;
@@ -41,12 +55,8 @@ public class Shelf extends Entity{
 		return this.dailyPrice;
 	}
 	
-	public Shelf(Integer location, Integer capacity, Integer productID, Double dailyPrice){
-		this.location = location;
-		this.capacity = capacity;
-		this.productID = productID;
-		this.dailyPrice = dailyPrice;
-		ShelfRepository.getInstance().addToList(this);
+	public Shelf(){
+
 	}
 	
 	@Override

@@ -1,15 +1,31 @@
 package io.altar.jsfproject.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Product extends Entity {
-	private ArrayList<Integer> shelfLoc;
-	private String name;
-	private Integer discount;
-	private Integer iva;
-	private Double price;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-	public void setShelfLoc(ArrayList<Integer> shelfLoc) {
+	@Entity
+	@Table(name="Products")
+	public class Product extends EntityModel implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		@Column(name="Shelves", nullable = true)
+//		private ArrayList<Integer> shelfLoc = new ArrayList<>();
+		private String shelfLoc ="shelfId";
+
+		private String name = "Name";
+		@Column(name="Discount")
+		private Integer discount = 0;
+		@Column(name="IVA")
+		private Integer iva = 0;
+		@Column(name="Price")
+		private Double price = 0.0;
+
+	public void setShelfLoc(String shelfLoc) {
 		this.shelfLoc = shelfLoc;
 	}
 
@@ -29,7 +45,7 @@ public class Product extends Entity {
 		this.price = price;
 	}
 
-	public ArrayList<Integer> getShelfLoc() {
+	public String getShelfLoc() {
 		return this.shelfLoc;
 	}
 

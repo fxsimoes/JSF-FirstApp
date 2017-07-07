@@ -1,22 +1,33 @@
 package io.altar.jsfproject.service;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import io.altar.jsfproject.service.EntityService;
 import io.altar.jsfproject.model.Shelf;
 import io.altar.jsfproject.repository.ShelfRepository;
 
-@ManagedBean(name = "shelfService")
+
+@Named("ShelfService")
 @ApplicationScoped
-public class ShelfService {
-	private ShelfRepository shelfList = ShelfRepository.getInstance();
-
-//	public List<Shelf> showShelves() {
-//		List<Shelf> list = new ArrayList<Shelf>((Collection<Shelf>) shelfList);
-//		return list;
-//	}
-
-	public void addShelf() {
-		shelfList.addToList(new Shelf(1, 2, null, 5.0));
+public class ShelfService extends EntityService<Shelf>{
+	@Inject
+	private ShelfRepository shelfList;
+	
+	public ShelfRepository getShelfRepository(){
+		return shelfList;
 	}
+	
+	public List<Shelf> showEntities(ShelfRepository shelfList){
+		List<Shelf> list = shelfList.getDbElements();
+		return list;
+	}
+	
+	public void editEntity(int id, int location, int capacity, int productID, double rentalPrice){
+		shelfList.modifyDb(id, location, capacity, productID, rentalPrice);
+	}
+
 }

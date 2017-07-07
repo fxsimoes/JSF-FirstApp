@@ -1,23 +1,21 @@
 package io.altar.jsfproject.service;
 
-import java.util.Collection;
-
-import io.altar.jsfproject.model.Entity;
+import io.altar.jsfproject.model.EntityModel;
 import io.altar.jsfproject.repository.EntityRepository;
 
-public class EntityService<E extends Entity> {
+public class EntityService<E extends EntityModel> {
 	
-	
-	public Collection<E> showEntities(EntityRepository<E> entityList){
-//		Collection<E> list = new ArrayList<E>(entityList.values());
-		return entityList.values();
-	}
 	
 	public void addEntity(EntityRepository<E> entityList, E entity){
-		entityList.addToList(entity);
+//		Collection<E> list = new ArrayList<E>(entityList.values());
+		entityList.addToDb(entity);
+	}
+	
+	public void editEntity(EntityRepository<E> entityList, E entity){
+		entityList.modifyDb(entity);
 	}
 	
 	public void removeEntity(EntityRepository<E> entityList, E entity){
-		entityList.remove(entity.getId());
+		entityList.removeFromDb(entity);
 	}
 }
